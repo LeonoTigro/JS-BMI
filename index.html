@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI數值判定</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(34, 34, 34);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bmi {
+            width: 400px;
+            height: 350px;
+            background-color: rgb(53, 53, 53);
+            margin-bottom: 10px;
+        }
+
+        .bmi-top {
+            width: 400px;
+            height: 50px;
+            text-align: center;
+            background-color: black;
+        }
+
+        .bmi-top>h1 {
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .bmi-mid {
+            width: 400px;
+            height: 200px;
+            background-color: rgb(78, 80, 74);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mid-height {
+            width: 185px;
+            height: 180px;
+            background-color: rgb(52, 50, 54);
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+
+        .mid-height-top {
+            width: 185px;
+            height: 40px;
+            color: white;
+            border-radius: 3px;
+            background-color: rgb(52, 50, 54);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mid-height-top>h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .mid-height-mid {
+            width: 185px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: bl;
+        }
+
+        #ipt-height {
+            width: 175px;
+            height: 80px;
+            border-radius: 5px;
+            background-color: rgb(44, 44, 44);
+            color: white;
+            outline: none;
+            font-size: 56px;
+            font-weight: bold;
+            border: none;
+            text-align: center;
+        }
+
+        .mid-height-bot {
+            width: 185px;
+            height: 40px;
+            color: white;
+            border-radius: 3px;
+            background-color: rgb(52, 50, 54);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mid-height-bot>h2 {
+            padding: 0;
+            margin: 0;
+        }
+
+        .mid-weight {
+            width: 185px;
+            height: 180px;
+            background-color: rgb(52, 50, 54);
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        .mid-weight-top {
+            width: 185px;
+            height: 40px;
+            color: white;
+            border-radius: 3px;
+            background-color: rgb(52, 50, 54);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mid-weight-top>h2 {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .mid-weight-mid {
+            width: 185px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: bl;
+        }
+
+        #ipt-weight {
+            width: 175px;
+            height: 80px;
+            border-radius: 5px;
+            background-color: rgb(44, 44, 44);
+            color: white;
+            outline: none;
+            font-size: 56px;
+            font-weight: bold;
+            border: none;
+            text-align: center;
+        }
+
+        .mid-weight-bot {
+            width: 185px;
+            height: 40px;
+            color: white;
+            border-radius: 3px;
+            background-color: rgb(52, 50, 54);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mid-weight-bot>h2 {
+            padding: 0;
+            margin: 0;
+        }
+
+        .bmi-bot {
+            width: 400px;
+            height: 100px;
+            background-color: rgb(78, 80, 74);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #bot-but-start {
+            height: 50px;
+            width: 140px;
+            border-radius: 3px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: rgb(255, 196, 0);
+            margin-right: 20px;
+            border: 0;
+        }
+
+        #bot-but-start:hover {
+            color: rgb(255, 196, 0);
+            background-color: black;
+        }
+
+        #bot-but-clean {
+            height: 50px;
+            width: 140px;
+            border-radius: 3px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: rgb(255, 196, 0);
+            border: 0;
+        }
+
+        #bot-but-clean:hover {
+            color: rgb(255, 196, 0);
+            background-color: black;
+        }
+
+        #remind-row {
+            display: none;
+
+    
+        }
+
+        .remind {
+            width: 400px;
+            height: 300px;
+            background-color: rgb(255, 196, 0);
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+        }
+
+        .remind-bmi {
+            width: 170px;
+            height: 150px;
+            background-color: rgb(24, 23, 23);
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        .remind-bmi-top {
+            width: 170px;
+            height: 50px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: black;
+
+        }
+
+        .remind-bmi-bot {
+            width: 170px;
+            height: 100px;
+            color: white;
+            font-size: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .remind-cdt {
+            width: 170px;
+            height: 150px;
+            background-color: rgb(24, 23, 23);
+            margin-top: 10px;
+        }
+
+        .remind-cdt-top {
+            width: 170px;
+            height: 50px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: black;
+        }
+
+        .remind-cdt-bot {
+            width: 170px;
+            height: 100px;
+            color: white;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .remind-note {
+            width: 350px;
+            height: 100px;
+            background-color: black;
+        }
+
+        .remind-note-top {
+            width: 350px;
+            height: 30px;
+            background-color: brown;
+            color: white;
+            font-size: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .remind-note-bot {
+            width: 350px;
+            height: 70px;
+            background-color: rgb(34, 33, 33);
+            color: white;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bmi">
+            <div class="bmi-top">
+                <h1>BMI 計算機</h1>
+            </div>
+            <div class="bmi-mid">
+                <div class="mid-height">
+                    <div class="mid-height-top">
+                        <h2>身高</h2>
+                    </div>
+                    <div class="mid-height-mid">
+                        <input type="text" id="ipt-height">
+                    </div>
+                    <div class="mid-height-bot">
+                        <h2>
+                            CM
+                        </h2>
+                    </div>
+                </div>
+                <div class="mid-weight">
+                    <div class="mid-weight-top">
+                        <h2>體重</h2>
+                    </div>
+                    <div class="mid-weight-mid">
+                        <input type="text" id="ipt-weight">
+                    </div>
+                    <div class="mid-weight-bot">
+                        <h2>KG</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="bmi-bot">
+                <button id="bot-but-start">
+                    <span>
+                        開始計算
+                    </span>
+                </button>
+                <button id="bot-but-clean">
+                    <span>
+                        清除重算
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div id="remind-row">
+            <div class="remind">
+                <div class="remind-bmi">
+                    <div class="remind-bmi-top">
+                        <h3>BMI值</h3>
+                    </div>
+                    <div class="remind-bmi-bot">
+                        <p id="result-bmi"></p>
+                    </div>
+
+                </div>
+                <div class="remind-cdt">
+                    <div class="remind-cdt-top">
+                        <h3>身體狀態</h3>
+                    </div>
+                    <div class="remind-cdt-bot">
+                        <p id="result-cdt"></p>
+                    </div>
+
+                </div>
+                <div class="remind-note">
+                    <div class="remind-note-top">
+                        <h3>建議參考</h3>
+                    </div>
+                    <div class="remind-note-bot">
+                        <p id="result-note"></p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <script>
+
+            var buttonstart = document.querySelector('#bot-but-start')
+            var removebutton = document.querySelector('#bot-but-clean')
+            var resultB = document.querySelector('#result-bmi')
+            var resultC = document.querySelector('#result-cdt')
+            var resultN = document.querySelector('#result-note')
+            var inputH = document.querySelector('#ipt-height')
+            var inputW = document.querySelector('#ipt-weight')
+            var show = document.querySelector('#remind-row')
+
+            buttonstart.onclick = function () {
+                var score = inputW.value / (inputH.value / 100) ** 2
+                score = score.toFixed(2);
+                console.log()
+
+                show.style['display'] = 'flex'
+                
+
+                if (isNaN(parseInt(score))) {
+                    resultB.innerHTML = ''
+                    resultC.innerHTML = ''
+                    resultN.innerHTML = '請輸入有效數字'
+                } else if (score < 0) {
+                    resultB.innerHTML = ''
+                    resultC.innerHTML = ''
+                    resultN.innerHTML = '請輸入正數'
+                    // } else if (score % 1 != 0) {
+                    //     resultN.innerHTML = '請輸入整數'
+                } else {
+                    if (score < 18.5) {
+                        resultB.innerHTML = score
+                        resultC.innerHTML = '體重過輕'
+                        resultN.innerHTML = '去找你阿嬤叫他餵好餵滿餵到爆'
+                    } else if (18.5 <= score & score < 24) {
+                        resultB.innerHTML = score
+                        resultC.innerHTML = '正常'
+                        resultN.innerHTML = '你很幸運'
+                    } else if (24 <= score & score < 27) {
+                        resultB.innerHTML = score
+                        resultC.innerHTML = '輕度肥胖'
+                        resultN.innerHTML = '放縱了喔'
+                    } else if (27 <= score & score < 30) {
+                        resultB.innerHTML = score
+                        resultC.innerHTML = '中度肥胖'
+                        resultN.innerHTML = '吃太胖會被殺掉的'
+                    } else {
+                        resultB.innerHTML = score
+                        resultC.innerHTML = '重度肥胖'
+                        resultN.innerHTML = '還是砍掉重練比較快'
+                    }
+
+                }
+            }
+
+            removebutton.onclick = function () {
+                resultB.innerHTML = ''
+                resultC.innerHTML = ''
+                resultN.innerHTML = ''
+                document.getElementById("ipt-height").value = "";
+                document.getElementById("ipt-weight").value = "";
+                show.style['display'] = 'none'
+
+            }
+
+        </script>
+
+
+    </div>
+</body>
+
+</html>
